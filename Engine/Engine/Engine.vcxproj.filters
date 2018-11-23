@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="ShaderClasses">
+      <UniqueIdentifier>{bb9ee950-cff7-48fc-bb78-05f86fc829b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderClasses\Base">
+      <UniqueIdentifier>{5799caba-aa6c-432e-8637-a62affcdd983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderClasses\Shader Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{f95e9c6e-cbdd-43ae-89f6-a70c1f1541f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh\Base">
+      <UniqueIdentifier>{874e3cf7-bb01-42d7-adba-245b7be41641}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cameraclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d3dclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graphicsclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inputclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lightclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="modelclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="systemclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textureclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rendertextureclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lightshaderclass.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>ShaderClasses\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexTypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\1303329\Downloads\TerrainMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CloudShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthoMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CurvedPlaneMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Mesh\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="PostShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="PBRShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="NonLitShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cameraclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicsclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inputclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modelclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="systemclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textureclass.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rendertextureclass.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightshaderclass.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>ShaderClasses\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CloudShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthoMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CurvedPlaneMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Mesh\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="PostShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="PBRShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="NonLitShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="light_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="light_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="FilterCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="sky_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="sky_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="particle_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="particle_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="terrain_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="terrain_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="TerrainCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="NormalCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="cloud_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="cloud_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="post_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="post_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="SmoothNormalCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="DefferedCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="ParticleCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="terrain_hs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="terrain_ds.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="pbr_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="pbr_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="nonlit_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="nonlit_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

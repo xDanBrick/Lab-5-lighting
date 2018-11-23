@@ -1,0 +1,33 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: modelclass.h
+////////////////////////////////////////////////////////////////////////////////
+#ifndef _MODELCLASS_H_
+#define _MODELCLASS_H_
+
+
+//////////////
+// INCLUDES //
+//////////////
+#include "Mesh.h"
+#include "textureclass.h"
+
+////////////////////////////////////////////////////////////////////////////////
+// Class name: ModelClass
+////////////////////////////////////////////////////////////////////////////////
+class ModelClass : public Mesh
+{
+private:
+public:
+	ModelClass();
+	ModelClass(const ModelClass&);
+	virtual ~ModelClass();
+
+	virtual bool Initialize(ID3D11Device*, char*, WCHAR*);
+	virtual void Shutdown() override;
+	ID3D11ShaderResourceView*			getTexture() { return texture_->GetTexture(); };
+protected:
+	ModelType* m_model;
+	TextureClass*			texture_;
+};
+
+#endif
