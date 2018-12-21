@@ -1,8 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: light.vs
-////////////////////////////////////////////////////////////////////////////////
-
-
 /////////////
 // GLOBALS //
 /////////////
@@ -41,7 +36,7 @@ PixelInputType main(VertexInputType input)
 {
 	PixelInputType output;
 
-	// Update the position of the vertices based on the data for this particular instance.
+	// Update the position of the vertices based on the data for this instance.
 	input.position.x += input.instancePosition.x;
 	input.position.y += input.instancePosition.y;
 	input.position.z += input.instancePosition.z;

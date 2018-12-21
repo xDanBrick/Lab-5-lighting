@@ -32,7 +32,7 @@ public:
 	void Shutdown();
 	bool Render(ID3D11DeviceContext*, Mesh* mesh, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, D3DXVECTOR4, D3DXVECTOR4);
 private:
-	ID3D11Buffer* skyBuffer_;
+	ConstantBuffer<SkyBufferType> skyBuffer_;
 };
 
 #endif

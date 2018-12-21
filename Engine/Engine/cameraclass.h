@@ -9,7 +9,7 @@
 // INCLUDES //
 //////////////
 #include <d3dx10math.h>
-
+#include "inputclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: CameraClass
@@ -32,6 +32,7 @@ public:
 
 	void Move(float x, float y, float z);
 	void Rotate(float x, float y, float z);
+	void Update(InputClass& input);
 private:
 	float m_positionX, m_positionY, m_positionZ;
 	float m_rotationX, m_rotationY, m_rotationZ;

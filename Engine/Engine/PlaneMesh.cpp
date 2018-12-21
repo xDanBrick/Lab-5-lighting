@@ -31,14 +31,20 @@ void CreatePlane(std::vector<VertexPosTexNorm>& vertices, float size, int tessel
 	}
 }
 
-PlaneMesh::PlaneMesh(ID3D11Device* device)
+PlaneMesh::PlaneMesh()
+{
+	
+}
+
+PlaneMesh::~PlaneMesh()
+{
+}
+
+bool PlaneMesh::Initalise(ID3D11Device * device)
 {
 	std::vector<VertexPosTexNorm> vertices;
 	CreatePlane(vertices, 256.0f, 256, 1);
 
 	CreateBuffers(device, vertices.data(), vertices.size());
-}
-
-PlaneMesh::~PlaneMesh()
-{
+	return true;
 }

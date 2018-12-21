@@ -12,18 +12,17 @@ class Particle : public Mesh
 	public:
 		Particle();
 		~Particle();
-		void			Shutdown() override;
-		void			Render(ID3D11DeviceContext* deviceContext) override;
-		bool			UpdateInstanceBuffer(ID3D11Device* device, InstanceType* positions, int count);
-		bool			Initalise(ID3D11Device* device, HWND hwnd);
-		inline int		getInstanceCount() { return instanceCount_; };
+		void					Shutdown() override;
+		void					Render(ID3D11DeviceContext* deviceContext) override;
+		bool					Initalise(ID3D11Device* device, HWND hwnd);
+		inline int				getInstanceCount() { return m_InstanceCount; };
 private:
-	ID3D11Buffer *		m_instanceBuffer;
-	int					instanceCount_;
-	InstanceType*		instanceType_;
-	ComputeShader	computeShader_;
-	ID3D11Buffer*	inputBuffer_, *outputBuffer_, *outputResultBuffer_;
-	ID3D11ShaderResourceView* inputView_;
-	ID3D11UnorderedAccessView* outputUAV_;
+	ID3D11Buffer *				m_InstanceBuffer;
+	int							m_InstanceCount;
+	InstanceType*				m_InstanceType;
+	ComputeShader				m_ComputeShader;
+	ID3D11Buffer*				m_InputBuffer, *m_OutputBuffer;
+	ID3D11ShaderResourceView*	m_InputView;
+	ID3D11UnorderedAccessView*	m_OutputUAV;
 };
 

@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: light.ps
-////////////////////////////////////////////////////////////////////////////////
-
 Texture2D texture1 : register(t0);
 SamplerState samplerState;
 
@@ -42,7 +38,7 @@ struct PixelOutputDeffered
 PixelOutputDeffered main(PixelInputType input) : SV_TARGET
 {
 	PixelOutputDeffered output;
-	output.color = float4(albedoColor, shininess);
+	output.color = float4(albedoColor * texture1.Sample(samplerState, input.tex), shininess);
 	output.normal = float4(input.normal.xyz, smoothness);
 	output.position = float4(input.worldPosition, 1.0f);
 	

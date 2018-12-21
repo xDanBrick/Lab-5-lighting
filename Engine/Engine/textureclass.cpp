@@ -6,7 +6,7 @@
 
 TextureClass::TextureClass()
 {
-	m_texture = 0;
+	m_texture = nullptr;
 }
 
 
@@ -22,17 +22,7 @@ TextureClass::~TextureClass()
 
 bool TextureClass::Initialize(ID3D11Device* device, WCHAR* filename)
 {
-	HRESULT result;
-
-
-	// Load the texture in.
-	result = D3DX11CreateShaderResourceViewFromFile(device, filename, NULL, NULL, &m_texture, NULL);
-	if(FAILED(result))
-	{
-		return false;
-	}
-
-	return true;
+	return SUCCEEDED(D3DX11CreateShaderResourceViewFromFile(device, filename, NULL, NULL, &m_texture, NULL));
 }
 
 

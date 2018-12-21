@@ -88,15 +88,20 @@ void CreateCurvedPlane(std::vector<VertexPosTexNorm>& vertices, float size, int 
 	}
 }
 
-CurvedPlaneMesh::CurvedPlaneMesh(ID3D11Device* device)
+CurvedPlaneMesh::CurvedPlaneMesh()
 {
-	//64, 20.0f, 1.0f, 1.0f
-	std::vector<VertexPosTexNorm> vertices;
-	CreateCurvedPlane(vertices, 512.0f, 128, 1);
-	CreateBuffers(device, vertices.data(), vertices.size());
+	
 }
 
 
 CurvedPlaneMesh::~CurvedPlaneMesh()
 {
+}
+
+bool CurvedPlaneMesh::Initalise(ID3D11Device * device)
+{
+	std::vector<VertexPosTexNorm> vertices;
+	CreateCurvedPlane(vertices, 512.0f, 128, 1);
+	CreateBuffers(device, vertices.data(), vertices.size());
+	return true;
 }

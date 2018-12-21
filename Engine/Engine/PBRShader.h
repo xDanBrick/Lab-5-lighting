@@ -8,7 +8,7 @@ class PBRShader : public Shader
 		~PBRShader();
 
 		bool			Initialize(ID3D11Device*, HWND) override;
-		bool			Render(ID3D11DeviceContext * context, Mesh * mesh, D3DXMATRIX world, D3DXMATRIX view, D3DXMATRIX proj, D3DXVECTOR3 albedoColor, float shininess, float smoothness);
+		bool			Render(ID3D11DeviceContext * context, Mesh * mesh, ID3D11ShaderResourceView* texture, D3DXMATRIX world, D3DXMATRIX view, D3DXMATRIX proj, D3DXVECTOR3 albedoColor, float shininess, float smoothness);
 		void			Shutdown() override;
 
 		struct MaterialBuffer

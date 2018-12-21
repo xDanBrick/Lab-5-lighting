@@ -4,7 +4,8 @@
 class CurvedPlaneMesh : public Mesh
 {
 public:
-	CurvedPlaneMesh(ID3D11Device* device);
+	CurvedPlaneMesh();
 	~CurvedPlaneMesh();
+	bool Initalise(ID3D11Device* device);
 };
 

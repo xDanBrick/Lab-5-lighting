@@ -81,9 +81,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\1303329\Downloads\TerrainMesh.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="CloudShader.cpp" />
     <ClCompile Include="ComputeShader.cpp" />
@@ -94,7 +91,6 @@
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="lightclass.cpp" />
-    <ClCompile Include="lightshaderclass.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="modelclass.cpp" />
@@ -104,7 +100,7 @@
     <ClCompile Include="ParticleShader.cpp" />
     <ClCompile Include="PBRShader.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
-    <ClCompile Include="PostShader.cpp" />
+    <ClCompile Include="DefferedShader.cpp" />
     <ClCompile Include="QuadMesh.cpp" />
     <ClCompile Include="rendertextureclass.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -126,7 +122,6 @@
     <ClInclude Include="graphicsclass.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="lightclass.h" />
-    <ClInclude Include="lightshaderclass.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="modelclass.h" />
     <ClInclude Include="NonLitShader.h" />
@@ -135,7 +130,7 @@
     <ClInclude Include="ParticleShader.h" />
     <ClInclude Include="PBRShader.h" />
     <ClInclude Include="PlaneMesh.h" />
-    <ClInclude Include="PostShader.h" />
+    <ClInclude Include="DefferedShader.h" />
     <ClInclude Include="QuadMesh.h" />
     <ClInclude Include="rendertextureclass.h" />
     <ClInclude Include="Shader.h" />
@@ -147,17 +142,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="light_ps.hlsl" />
-    <None Include="light_vs.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="TerrainCompute.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FilterCompute.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>
@@ -201,15 +187,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SmoothNormalCompute.hlsl">
+    <None Include="hdr_ps.hlsl">
       <FileType>Document</FileType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="post_ps.hlsl">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="post_vs.hlsl">
+    <None Include="hdr_vs.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>
@@ -221,14 +202,6 @@
   <ItemGroup>
     <None Include="ParticleCompute.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <FileType>Document</FileType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="terrain_ds.hlsl">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="terrain_hs.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

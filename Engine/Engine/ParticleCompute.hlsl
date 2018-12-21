@@ -6,8 +6,6 @@ struct ParticleData
 StructuredBuffer<ParticleData>			inputConstantParticleData   : register(t0);
 RWStructuredBuffer<ParticleData>        outputParticleData          : register(u0);
 
-//cbuffer 
-
 [numthreads(100, 1, 1)]
 void main(int3 dispatchThreadID : SV_DispatchThreadID)
 {

@@ -246,7 +246,7 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 		posY = (GetSystemMetrics(SM_CYSCREEN) - screenHeight) / 2;
 	}
 
-	mainWindow_.Initalise(MainMessageHandler, L"MainWindow", L"MainWindow", WS_OVERLAPPEDWINDOW, posX, posY, screenWidth, screenHeight);
+	mainWindow_.Initalise(MainMessageHandler, L"MainWindow", L"Graphics Demo", WS_OVERLAPPEDWINDOW, posX, posY, screenWidth, screenHeight);
 	mainWindow_.Show(SW_MAXIMIZE);
 
 	gameWindow_.Initalise(WndProc, L"Engine", L"Engine", WS_POPUP | WS_CHILDWINDOW, posX, posY, screenWidth, screenHeight, mainWindow_.getHWND());

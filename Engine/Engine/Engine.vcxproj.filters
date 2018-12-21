@@ -25,6 +25,9 @@
     <Filter Include="Mesh\Base">
       <UniqueIdentifier>{874e3cf7-bb01-42d7-adba-245b7be41641}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderClasses\Shader Files\Compute">
+      <UniqueIdentifier>{003a39fd-0068-4e14-a85b-8e07770b618e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -57,9 +60,6 @@
     <ClCompile Include="rendertextureclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lightshaderclass.cpp">
-      <Filter>ShaderClasses</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>ShaderClasses\Base</Filter>
     </ClCompile>
@@ -82,9 +82,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D3DGraphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\1303329\Downloads\TerrainMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CloudShader.cpp">
@@ -111,13 +108,13 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Mesh\Base</Filter>
     </ClCompile>
-    <ClCompile Include="PostShader.cpp">
-      <Filter>ShaderClasses</Filter>
-    </ClCompile>
     <ClCompile Include="PBRShader.cpp">
       <Filter>ShaderClasses</Filter>
     </ClCompile>
     <ClCompile Include="NonLitShader.cpp">
+      <Filter>ShaderClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DefferedShader.cpp">
       <Filter>ShaderClasses</Filter>
     </ClCompile>
   </ItemGroup>
@@ -148,9 +145,6 @@
     </ClInclude>
     <ClInclude Include="rendertextureclass.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lightshaderclass.h">
-      <Filter>ShaderClasses</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>ShaderClasses\Base</Filter>
@@ -200,26 +194,17 @@
     <ClInclude Include="Mesh.h">
       <Filter>Mesh\Base</Filter>
     </ClInclude>
-    <ClInclude Include="PostShader.h">
-      <Filter>ShaderClasses</Filter>
-    </ClInclude>
     <ClInclude Include="PBRShader.h">
       <Filter>ShaderClasses</Filter>
     </ClInclude>
     <ClInclude Include="NonLitShader.h">
       <Filter>ShaderClasses</Filter>
     </ClInclude>
+    <ClInclude Include="DefferedShader.h">
+      <Filter>ShaderClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="light_vs.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="light_ps.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="FilterCompute.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
     <None Include="sky_vs.hlsl">
       <Filter>ShaderClasses\Shader Files</Filter>
     </None>
@@ -238,37 +223,10 @@
     <None Include="terrain_ps.hlsl">
       <Filter>ShaderClasses\Shader Files</Filter>
     </None>
-    <None Include="TerrainCompute.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="NormalCompute.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
     <None Include="cloud_ps.hlsl">
       <Filter>ShaderClasses\Shader Files</Filter>
     </None>
     <None Include="cloud_vs.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="post_ps.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="post_vs.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="SmoothNormalCompute.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="DefferedCompute.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="ParticleCompute.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="terrain_hs.hlsl">
-      <Filter>ShaderClasses\Shader Files</Filter>
-    </None>
-    <None Include="terrain_ds.hlsl">
       <Filter>ShaderClasses\Shader Files</Filter>
     </None>
     <None Include="pbr_ps.hlsl">
@@ -282,6 +240,24 @@
     </None>
     <None Include="nonlit_ps.hlsl">
       <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="hdr_ps.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="hdr_vs.hlsl">
+      <Filter>ShaderClasses\Shader Files</Filter>
+    </None>
+    <None Include="DefferedCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files\Compute</Filter>
+    </None>
+    <None Include="NormalCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files\Compute</Filter>
+    </None>
+    <None Include="ParticleCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files\Compute</Filter>
+    </None>
+    <None Include="TerrainCompute.hlsl">
+      <Filter>ShaderClasses\Shader Files\Compute</Filter>
     </None>
   </ItemGroup>
 </Project>

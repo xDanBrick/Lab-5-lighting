@@ -102,7 +102,6 @@ float3 DirectSpecularBRDF(float roughness, float3 specularAlbedo, float3 positio
 	float  D = alpha2 / (Pi * pow(nDotH * nDotH * (alpha2 - 1) + 1, 2.0f));
 
 	// Computes the amount of light that reflects from a mirror surface given its index of refraction. 
-	// Schlick's approximation.
 	float3 F = Schlick_Fresnel(specularAlbedo, halfVec, lightDir);
 
 	// Computes the shadowing from the microfacets.
@@ -138,15 +137,6 @@ float4 CalulateLight(LightBufferType light, float3 texureColor, float3 normals, 
 		lightDir = pixelToLight / lightDist;
 		att = 1.0f / (0.0f + light.attenuation.x * lightDist + 0.0f * (lightDist * lightDist));
 		lightIntensity = saturate(dot(normals, lightDir));
-
-		//Spot
-		if (light.lightType.x == 2.0f)
-		{
-			float minCos = cos(light.spotAngle.x);
-			float maxCos = (minCos + 1.0f) / 2.0f;
-			float cosAngle = dot(lightDir, -lightIntensity);
-			spot = smoothstep(minCos, maxCos, cosAngle);
-		}
 	}
 	if (lightIntensity > 0.0f)
 	{
@@ -183,14 +173,20 @@ void main(int3 dispatchThreadID : SV_DispatchThreadID)
 	float4 normals = normalTexture.SampleLevel(sampleType, texCoors, 1.0f);
 	float4 diffuseColor = diffuseTexture.SampleLevel(sampleType, texCoors, 1.0f);
 
+	//If this pixel is not to be lit
 	if (normals.x == 0.0f &&  normals.y == 0.0f && normals.z == 0.0f)
 	{
 		output[dispatchThreadID.xy] = diffuseColor;
 	}
 	else
 	{
+		//Get position of pixel from texture.
 		float4 pos = positionTexture.SampleLevel(sampleType, texCoors, 1.0f);
+
+		//Get the position of the color.
 		float4 color = lights[0].ambientColor;
+
+		//For all the lights
 		for (unsigned int i = 0; i < lightCount; ++i)
 		{
 			color += CalulateLight(lights[i], diffuseColor.xyz, normals.xyz, pos.xyz, float3(diffuseColor.w, diffuseColor.w, diffuseColor.w), normals.w, cameraPosition);

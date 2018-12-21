@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: light.ps
-////////////////////////////////////////////////////////////////////////////////
-
 Texture2D texture1 : register(t0);
 SamplerState samplerState;
 
@@ -33,7 +29,7 @@ struct PixelOutputDeffered
 PixelOutputDeffered main(PixelInputType input) : SV_TARGET
 {
 	PixelOutputDeffered output;
-	output.color = texture1.Sample(samplerState, input.tex);
+	output.color = texture1.Sample(samplerState, input.tex) * float4(0.5f, 0.5f, 0.5f, 0.5f);
 	output.normal = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	output.position = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	

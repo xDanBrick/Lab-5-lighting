@@ -19,12 +19,12 @@ bool EditField::Initalise(float * value, int x, int y, int width, int height, HW
 
 void EditField::OnCommand(WPARAM wParam)
 {
-	
-
 	if (LOWORD(wParam) == getId())
 	{
+		//If the user has changed the edit box
 		if (HIWORD(wParam) == EN_CHANGE)
 		{
+			//Get the text from the edit box
 			char buff[100];
 			GetWindowTextA(hwnd_, buff, sizeof(buff));
 			std::string text = buff;
@@ -37,8 +37,11 @@ void EditField::OnCommand(WPARAM wParam)
 			}
 			std::istringstream iss(text);
 			iss >> std::noskipws >> value;
+
+			//If the text is numbers
 			if (iss && iss.eof())
 			{
+				//Update the variable ptr with the text
 				*valuePtr_ = value;
 				return;
 			}

@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "cameraclass.h"
 
+const float CAM_MOVE_SPEED = 0.2f;
 
 CameraClass::CameraClass()
 {
@@ -118,4 +119,73 @@ void CameraClass::Rotate(float x, float y, float z)
 	m_rotationY += y;
 	m_rotationZ += z;
 	
+}
+
+void CameraClass::Update(InputClass& input)
+{
+	float x = 0.0f;
+	float y = 0.0f;
+	float z = 0.0f;
+
+	//Camera Translation in the x
+	if (input.IsKeyDown('A'))
+	{
+		float radians = m_rotationY * 0.0174532925f;
+		Move(cosf(radians) * -CAM_MOVE_SPEED, 0.0f, -sinf(radians) * -CAM_MOVE_SPEED);
+
+	}
+	else if (input.IsKeyDown('D'))
+	{
+		float radians = m_rotationY * 0.0174532925f;
+		Move(cosf(radians) * CAM_MOVE_SPEED, 0.0f, -sinf(radians) * CAM_MOVE_SPEED);
+	}
+
+	//Camera Translation in the Y
+	if (input.IsKeyDown('Q'))
+	{
+		Move(0.0f, CAM_MOVE_SPEED * 2.0f, 0.0f);
+	}
+	else if (input.IsKeyDown('E'))
+	{
+		Move(0.0f, -CAM_MOVE_SPEED * 2.0f, 0.0f);
+	}
+
+	//Camera Translation in the z
+	if (input.IsKeyDown('W'))
+	{
+		Move(sinf(D3DXToRadian(m_rotationY)) * CAM_MOVE_SPEED, -sinf(D3DXToRadian(m_rotationX)) * CAM_MOVE_SPEED, cosf(D3DXToRadian(m_rotationY)) * CAM_MOVE_SPEED);
+	}
+	else if (input.IsKeyDown('S'))
+	{
+		Move(sinf(D3DXToRadian(m_rotationY)) * -CAM_MOVE_SPEED, -sinf(D3DXToRadian(m_rotationX)) * -CAM_MOVE_SPEED, cosf(D3DXToRadian(m_rotationY)) * -CAM_MOVE_SPEED);
+	}
+
+	//Reset translation ammounts to 0
+	x = 0.0f;
+	y = 0.0f;
+	z = 0.0f;
+
+	//Camera Rotation in the x
+	if (input.IsKeyDown(VK_UP))
+	{
+		x = -CAM_MOVE_SPEED * 2.0f;
+	}
+	else if (input.IsKeyDown(VK_DOWN))
+	{
+		x = CAM_MOVE_SPEED * 2.0f;
+	}
+
+	//Camera Rotation in the Y
+	if (input.IsKeyDown(VK_RIGHT))
+	{
+		y = 5.0f;
+	}
+	else if (input.IsKeyDown(VK_LEFT))
+	{
+		y = -5.0f;
+	}
+
+	Rotate(x, y, z);
+
+	Render();
 }

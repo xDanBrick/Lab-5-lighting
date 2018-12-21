@@ -3,11 +3,6 @@ float4 Normal(float3 pos1, float3 pos2, float3 pos3)
 	float3 vector1 = float3(pos1.x - pos3.x, pos1.y - pos3.y, pos1.z - pos3.z);
 	float3 vector2 = float3(pos3.x - pos2.x, pos3.y - pos2.y, pos3.z - pos2.z);
 
-	//// Calculate the cross product of those two vectors to get the un-normalized value for this face normal.
-	//normals.push_back({ (vector1[1] * vector2[2]) - (vector1[2] * vector2[1]),
-	//	(vector1[2] * vector2[0]) - (vector1[0] * vector2[2]),
-	//	(vector1[0] * vector2[1]) - (vector1[1] * vector2[0]) });
-	
 	float3 normal = float3((vector1.y * vector2.z) - (vector1.z * vector2.y), (vector1.z * vector2.x) - (vector1.x * vector2.z), (vector1.x * vector2.y) - (vector1.y * vector2.x));
 	float length = sqrt((normal.x * normal.x) + (normal.y * normal.y) + (normal.z * normal.z));
 

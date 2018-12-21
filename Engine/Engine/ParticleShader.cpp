@@ -22,16 +22,19 @@ void ParticleShader::Shutdown()
 
 bool ParticleShader::CreateInputLayout(ID3D11Device * device, ID3D10Blob * vertexShaderBlob)
 {
+	//Overrride the default input layout with the new one containing instancing
 	return SUCCEEDED(device->CreateInputLayout(VertexInstancedPosTexNorm::getInputElements(), VertexInstancedPosTexNorm::getInputElementCount(), vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(),
 		&m_layout));
 }
 
-bool ParticleShader::Render(ID3D11DeviceContext * context, Mesh* mesh, D3DXMATRIX world, D3DXMATRIX view, D3DXMATRIX projection)
+bool ParticleShader::Render(ID3D11DeviceContext * deviceContext, Mesh* mesh, ID3D11ShaderResourceView* texture, D3DXMATRIX world, D3DXMATRIX view, D3DXMATRIX projection)
 {
-	return Shader::SetBaseParameters(context, mesh, world, view, projection);
+	deviceContext->PSSetShaderResources(0, 1, &texture);
+	return Shader::SetBaseParameters(deviceContext, mesh, world, view, projection);
 }
 
 void ParticleShader::DrawMesh(ID3D11DeviceContext * context, Mesh* mesh)
 {
+	//Override the default draw mesh to draw instances rather than indexed
 	context->DrawInstanced(mesh->getVertexCount(), ((Particle*)mesh)->getInstanceCount(), 0, 0);
 }

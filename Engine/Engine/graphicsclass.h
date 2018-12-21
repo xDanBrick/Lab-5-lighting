@@ -11,7 +11,6 @@
 #include "d3dclass.h"
 #include "cameraclass.h"
 #include "modelclass.h"
-#include "lightshaderclass.h"
 #include "lightclass.h"
 #include "rendertextureclass.h"
 #include "inputclass.h"
@@ -25,7 +24,7 @@
 #include "CloudShader.h"
 #include "CurvedPlaneMesh.h"
 #include "OrthoMesh.h"
-#include "PostShader.h"
+#include "DefferedShader.h"
 #include <vector>
 #include "PBRShader.h"
 #include "NonLitShader.h"
@@ -37,7 +36,6 @@ const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
-const float CAM_MOVE_SPEED = 0.2f;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: GraphicsClass
@@ -45,52 +43,54 @@ const float CAM_MOVE_SPEED = 0.2f;
 class GraphicsClass
 {
 public:
-	GraphicsClass(InputClass& input);
-	GraphicsClass(const GraphicsClass&);
-	~GraphicsClass();
+								GraphicsClass(InputClass& input);
+								GraphicsClass(const GraphicsClass&);
+								~GraphicsClass();
 
-	bool						Initialize(int, int, Window* hwnd);
+	bool						Initialize(int, int, Window* window);
 	void						Shutdown();
 	bool						Frame();
 	void						OnCommand(WPARAM param);
 	void						OnPaint(HDC hdc);
 private:
-	bool						Render(float, float);
-	void						UpdateCameraInput(float delta);
-	
-private:
-	D3DClass*					m_D3D;
-	CameraClass*				m_Camera;
-	ModelClass*					m_Model;
-	LightShaderClass*			m_LightShader;
-	LightClass*					m_Light;
-	InputClass&					input_;
-	SkyShader*					skyShader_;
-	Particle*					instanceRenderer_;
-	ParticleShader*				particleShader_;
-	PlaneMesh*					planeMesh_;
-	TerrainShader*				terrainShader_;
-	Window*						gameWindow_;
+	bool						Render();
+	bool						RenderScene(D3DXMATRIX& worldMatrix, D3DXMATRIX& viewMatrix, D3DXMATRIX& projectionMatrix);
+	bool						RenderSky(D3DXMATRIX& worldMatrix, D3DXMATRIX& viewMatrix, D3DXMATRIX& projectionMatrix);
+	bool						RenderDefferedScene(D3DXMATRIX& worldMatrix, D3DXMATRIX& viewMatrix, D3DXMATRIX& projectionMatrix);
+	void						AddEditorField(float * value, int x, int y, int width, int height, HWND parent, int id);
+	bool						MessageBoxFailed(bool value, std::string name);
 
-	CurvedPlaneMesh*			curvedPlane_;
-	CloudShader*				cloudShader_;
-	float						terrainScaler_, persistence_, octaves_;
-	D3DXVECTOR2 				cloudBrightness_, cloudScales_, cloudSpeeds_;
-	float						lightCount_;
+	D3DClass					m_D3D;
+	CameraClass					m_Camera;
+	ModelClass					m_SphereMesh, m_CubeMesh;
+	InputClass&					m_Input;
+	SkyShader					m_SkyShader;
+	Particle					m_InstanceRenderer;
+	ParticleShader				m_ParticleShader;
+	PlaneMesh					m_PlaneMesh;
+	TerrainShader				m_TerrainShader;
+	Window*						m_GameWindow;
 
-	std::vector<EditField*>		editFields_;
-	bool						updateHeightmap_;
+	CurvedPlaneMesh				m_CurvedPlane;
+	CloudShader					m_CloudShader;
+	float						m_TerrainScaler, m_Persistence, m_Octaves;
+	D3DXVECTOR2 				m_CloudBrightness, m_CloudScales, m_CloudSpeeds;
+	float						m_LightCount;
 
-	TextureClass*				cloudTexture_, *perturbTexture_;
-	InstanceType*				particleInstances_;
-	int							particleCount_;
-	OrthoMesh					orthoMesh_;
-	PostShader					postShader_;
-	PBRShader					pbrShader_;
-	NonLitShader				nonLitShader_;
-	TextureClass				sunTexture_;
-	float						terrainSlopeHeight_;
-	HFONT						standardFont_, boldFont_;
+	std::vector<EditField*>		m_EditFields;
+	bool						m_UpdateHeightmap;
+
+	TextureClass				m_CloudTexture, m_PerturbTexture, m_SnowTexture;
+	InstanceType				m_ParticleInstances;
+	int							m_ParticleCount;
+	OrthoMesh					m_OrthoMesh;
+	DefferedShader				m_DefferedShader;
+	PBRShader					m_PbrShader;
+	NonLitShader				m_NonLitShader;
+	TextureClass				m_SunTexture;
+	float						m_TerrainSlopeHeight, m_SunRotation, m_Exposure, m_Srgb, m_TonemapValue;
+	HFONT						m_StandardFont, m_BoldFont;
+	D3DXVECTOR3					m_SunDirection;
 };
 
 #endif

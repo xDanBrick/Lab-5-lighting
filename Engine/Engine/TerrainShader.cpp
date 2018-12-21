@@ -1,12 +1,11 @@
 #include "TerrainShader.h"
 
+const int TERRAIN_DIMENSIONS = 256;
+
 TerrainShader::TerrainShader()
 {
 	heightmapTexture_ = nullptr;
 	heightmapResourceView_ = nullptr;
-	structuredBufferUAV_ = nullptr;
-	hullShader_ = nullptr;
-	domainShader_ = nullptr;
 }
 
 
@@ -14,104 +13,28 @@ TerrainShader::~TerrainShader()
 {
 }
 
-bool TerrainShader::Initialize(ID3D11Device * device, HWND hwnd)
+bool TerrainShader::Initialize(ID3D11Device* device, HWND hwnd)
 {
-	D3D11_TEXTURE2D_DESC textureDesc;
-	ZeroMemory(&textureDesc, sizeof(textureDesc));
-	textureDesc.Width = 256;
-	textureDesc.Height = 256;
-	textureDesc.MipLevels = 1;
-	textureDesc.ArraySize = 1;
-	textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	textureDesc.SampleDesc.Count = 1;
-	textureDesc.SampleDesc.Quality = 0;
-	textureDesc.Usage = D3D11_USAGE_DEFAULT;
-	textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS;
-	textureDesc.CPUAccessFlags = 0;
-	textureDesc.MiscFlags = 0;
-	device->CreateTexture2D(&textureDesc, 0, &heightmapTexture_);
+	//Create heightmap texture and resources
+	heightmapTexture_ = D3DGraphics::CreateTexture2D(device, TERRAIN_DIMENSIONS, TERRAIN_DIMENSIONS);
+	heightmapTextureUAV_ = D3DGraphics::CreateTextureUnorderedAccessView(device, heightmapTexture_);
+	heightmapResourceView_ = D3DGraphics::CreateShaderResourceView(device, heightmapTexture_);
 
-	D3D11_UNORDERED_ACCESS_VIEW_DESC descUAV;
-	ZeroMemory(&descUAV, sizeof(descUAV));
-	descUAV.Format = DXGI_FORMAT_UNKNOWN;
-	descUAV.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2D;
-	descUAV.Texture2D.MipSlice = 0;
-	device->CreateUnorderedAccessView(heightmapTexture_, &descUAV, &structuredBufferUAV_);
-
-	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
-	srvDesc.Format = textureDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	srvDesc.Texture2D.MipLevels = 1;
-	device->CreateShaderResourceView(heightmapTexture_, &srvDesc, &heightmapResourceView_);
+	//Create normalmap texture and resources
+	normalmapTexture_ = D3DGraphics::CreateTexture2D(device, TERRAIN_DIMENSIONS, TERRAIN_DIMENSIONS);
+	normalmapTextureUAV_ = D3DGraphics::CreateTextureUnorderedAccessView(device, normalmapTexture_);
+	normalmapResourceView_ = D3DGraphics::CreateShaderResourceView(device, normalmapTexture_);
 
 	terrainBuffer_.Initalise(device);
 
-	ZeroMemory(&textureDesc, sizeof(textureDesc));
-	textureDesc.Width = 256;
-	textureDesc.Height = 256;
-	textureDesc.MipLevels = 1;
-	textureDesc.ArraySize = 1;
-	textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	textureDesc.SampleDesc.Count = 1;
-	textureDesc.SampleDesc.Quality = 0;
-	textureDesc.Usage = D3D11_USAGE_DEFAULT;
-	textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS;
-	textureDesc.CPUAccessFlags = 0;
-	textureDesc.MiscFlags = 0;
-	device->CreateTexture2D(&textureDesc, 0, &normalmapTexture_);
-
-	ZeroMemory(&descUAV, sizeof(descUAV));
-	descUAV.Format = DXGI_FORMAT_UNKNOWN;
-	descUAV.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2D;
-	descUAV.Texture2D.MipSlice = 0;
-	device->CreateUnorderedAccessView(normalmapTexture_, &descUAV, &normalmapTextureUAV_);
-
-	srvDesc.Format = textureDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	srvDesc.Texture2D.MipLevels = 1;
-	device->CreateShaderResourceView(normalmapTexture_, &srvDesc, &normalmapResourceView_);
-
-	////////////////////////////////////////////////////////////////////////////////////////
-
-	ZeroMemory(&textureDesc, sizeof(textureDesc));
-	textureDesc.Width = 256;
-	textureDesc.Height = 256;
-	textureDesc.MipLevels = 1;
-	textureDesc.ArraySize = 1;
-	textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	textureDesc.SampleDesc.Count = 1;
-	textureDesc.SampleDesc.Quality = 0;
-	textureDesc.Usage = D3D11_USAGE_DEFAULT;
-	textureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS;
-	textureDesc.CPUAccessFlags = 0;
-	textureDesc.MiscFlags = 0;
-	device->CreateTexture2D(&textureDesc, 0, &smoothNormalmapTexture_);
-
-	ZeroMemory(&descUAV, sizeof(descUAV));
-	descUAV.Format = DXGI_FORMAT_UNKNOWN;
-	descUAV.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2D;
-	descUAV.Texture2D.MipSlice = 0;
-	device->CreateUnorderedAccessView(smoothNormalmapTexture_, &descUAV, &smoothNormalmapUAV_);
-
-	srvDesc.Format = textureDesc.Format;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	srvDesc.Texture2D.MipLevels = 1;
-	device->CreateShaderResourceView(smoothNormalmapTexture_, &srvDesc, &smoothNormalmapResourceView_);
-
+	//Create compute shader for calc heightmap
 	if (!computeShader_.Initalise(device, hwnd, L"../Engine/TerrainCompute.hlsl"))
 	{
 		return false;
 	}
 
+	//Create compute shader for calc normalmap
 	if (!normalComputeShader_.Initalise(device, hwnd, L"../Engine/NormalCompute.hlsl"))
-	{
-		return false;
-	}
-
-	if (!smoothNormalCompute_.Initalise(device, hwnd, L"../Engine/SmoothNormalCompute.hlsl"))
 	{
 		return false;
 	}
@@ -120,46 +43,20 @@ bool TerrainShader::Initialize(ID3D11Device * device, HWND hwnd)
 	{
 		return false;
 	}
-
-	auto shaderBuffer = D3DGraphics::CompileShader(device, hwnd, L"../Engine/terrain_hs.hlsl", "hs_5_0");
-	if (!shaderBuffer)
-	{
-		return false;
-	}
-
-	// Create the vertex shader from the buffer.
-	if (FAILED(device->CreateHullShader(shaderBuffer->GetBufferPointer(), shaderBuffer->GetBufferSize(), NULL, &hullShader_)))
-	{
-		return false;
-	}
-
-	shaderBuffer = D3DGraphics::CompileShader(device, hwnd, L"../Engine/terrain_ds.hlsl", "ds_5_0");
-	if (!shaderBuffer)
-	{
-		return false;
-	}
-
-	// Create the vertex shader from the buffer.
-	if (FAILED(device->CreateDomainShader(shaderBuffer->GetBufferPointer(), shaderBuffer->GetBufferSize(), NULL, &domainShader_)))
-	{
-		return false;
-	}
-
 	return InitializeShader(device, hwnd, L"../Engine/terrain_vs.hlsl", L"../Engine/terrain_ps.hlsl");
 }
 
 void TerrainShader::Shutdown()
 {
-	ReleaseNull(structuredBufferUAV_);
+	ReleaseNull(heightmapTextureUAV_);
 	ReleaseNull(heightmapResourceView_);
 	ReleaseNull(heightmapTexture_);
-	ReleaseNull(hullShader_);
-	ReleaseNull(domainShader_);
 	Shader::Shutdown();
 }
 
 bool TerrainShader::Render(ID3D11DeviceContext * deviceContext, Mesh* mesh, D3DXMATRIX world, D3DXMATRIX view, D3DXMATRIX projection, ID3D11ShaderResourceView* texture, float perlinScale, float persistance, float octaves, float slopeHeight, bool& updateHeightmap)
 {
+	//If the heightmap needs updated
 	if (updateHeightmap)
 	{
 		terrainBuffer_.getValuePtr()->octaves = octaves;
@@ -171,14 +68,15 @@ bool TerrainShader::Render(ID3D11DeviceContext * deviceContext, Mesh* mesh, D3DX
 		UINT initCounts = 0;
 		auto terrainBuffer = terrainBuffer_.getBuffer();
 		deviceContext->CSSetConstantBuffers(0, 1, &terrainBuffer);
-		deviceContext->CSSetUnorderedAccessViews(0, 1, &structuredBufferUAV_, &initCounts);
+		deviceContext->CSSetUnorderedAccessViews(0, 1, &heightmapTextureUAV_, &initCounts);
 
-		//Set the Compute shader
+		//Run the compute shader for calc heightmap
 		computeShader_.Dispatch(deviceContext, 16, 16);
 		
 		deviceContext->CSSetUnorderedAccessViews(0, 1, &normalmapTextureUAV_, &initCounts);
 		deviceContext->CSSetShaderResources(0, 1, &heightmapResourceView_);
 
+		//Run the compute shader for calc normalmap
 		normalComputeShader_.Dispatch(deviceContext, 16, 16);
 		updateHeightmap = false;
 	}
@@ -192,6 +90,6 @@ bool TerrainShader::Render(ID3D11DeviceContext * deviceContext, Mesh* mesh, D3DX
 
 	auto terrainBuffer = terrainPSBuffer_.getBuffer();
 	deviceContext->PSSetConstantBuffers(0, 1, &terrainBuffer);
-	Shader::SetBaseParameters(deviceContext, mesh, world, view, projection);
-	return true;
+
+	return Shader::SetBaseParameters(deviceContext, mesh, world, view, projection);
 }
